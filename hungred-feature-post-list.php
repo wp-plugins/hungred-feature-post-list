@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 1.0.0
+Version: 1.0.1
 Author URI: http://hungred.com
 */
 
@@ -92,7 +92,7 @@ Description: uses wp_enqueue_style for safe printing of CSS style sheets
 */
 function hfpl_loadcss()
 {
-	wp_enqueue_style('ini',get_settings('siteurl').'/wp-content/plugins/hungred-feature-post-list/css/hfpl_ini.css');
+	wp_enqueue_style('hfpl_ini',get_settings('siteurl').'/wp-content/plugins/hungred-feature-post-list/css/hfpl_ini.css');
 }
 /*
 Name: hfpl_loadjs
@@ -103,7 +103,7 @@ Description: uses wp_enqueue_script for safe printing of JavaScript
 function hfpl_loadjs()
 {
 	wp_enqueue_script('jquery');
-	wp_enqueue_script('ini', get_settings('siteurl').'/wp-content/plugins/hungred-feature-post-list/js/hfpl_ini.js');
+	wp_enqueue_script('hfpl_ini', get_settings('siteurl').'/wp-content/plugins/hungred-feature-post-list/js/hfpl_ini.js');
 }
 add_action('admin_print_scripts', 'hfpl_loadjs');
 add_action('admin_print_styles', 'hfpl_loadcss');
