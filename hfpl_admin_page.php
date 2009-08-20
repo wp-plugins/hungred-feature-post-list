@@ -1,4 +1,20 @@
 <?php
+/*  Copyright 2009  Clay Lua  (email : clay@hungred.com)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 global $wpdb, $mode;
 $error = "";
 $table = $wpdb->prefix."hfpl_options";
@@ -96,7 +112,7 @@ foreach ($row as $post) {
 		<hr />
 		<h2><?php _e("Support" ); ?></h2>
 		<p>
-		Please visit hungred.com for any support enquiry or email clay@hungred.com. If you like this plugin, you can buy me a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">coffee</a>! You can also support this development with the donation button. Thanks!
+		Please visit <a href="http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/">hungred.com</a> for any support enquiry or email clay@hungred.com. You can also show your appreciation by saying 'Thanks' on the <a href='http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/'>plugin page</a>. If you like this plugin, you can buy me a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">coffee</a>! You can also support this development with the donation button. Thanks!
 		<p>
 <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="ppbutton" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Support%20Hungred%20Feature%20Post%20List%20Development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest');return false;">
 <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
