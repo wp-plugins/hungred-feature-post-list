@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_
 Tags: post, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
 Requires at least: 2.7
 Tested up to: 2.8.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 This thumbnail is created by Clay Lua. Please visit the plugin page for more information.
 
