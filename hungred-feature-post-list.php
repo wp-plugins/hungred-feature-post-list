@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 1.0.3
+Version: 1.0.4
 Author URI: http://hungred.com
 */
 
@@ -159,6 +159,9 @@ function hfpl_uninstall()
 {
 	global $wpdb;
 
+	$table = $wpdb->prefix."hfpl_records";
+	$structure = "DROP TABLE `".$table."`";
+	$wpdb->query($structure);
 	
 	$table = $wpdb->prefix."hfpl_options";
 	$structure = "DROP TABLE `".$table."`";
