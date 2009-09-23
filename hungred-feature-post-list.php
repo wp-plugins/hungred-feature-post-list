@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 1.0.4
+Version: 1.0.5
 Author URI: http://hungred.com
 */
 
@@ -60,7 +60,7 @@ Parameter: 	NONE
 Description: this method depend on hfpl_admin_page.php to display all the relevant information on our admin page
 */
 function hfpl_admin(){
-	require_once(dirname(__FILE__) .'/hfpl_admin_page.php');  
+	require_once(WP_PLUGIN_DIR .'/hungred-feature-post-list/hfpl_admin_page.php');  
 }
 add_action('admin_menu', 'add_hfpl_to_admin_panel_actions');
 /*
@@ -82,7 +82,7 @@ Description: This method depends on hfpl_post_page.php for the code.
 */
 function hfpl_post_display()
 {
-	require_once(dirname(__FILE__) .'/hfpl_post_page.php');
+	require_once(WP_PLUGIN_DIR .'/hungred-feature-post-list/hfpl_post_page.php');
 }
 /*
 Name: hfpl_loadcss
@@ -92,7 +92,7 @@ Description: uses wp_enqueue_style for safe printing of CSS style sheets
 */
 function hfpl_loadcss()
 {
-	wp_enqueue_style('hfpl_ini',get_settings('siteurl').'/wp-content/plugins/hungred-feature-post-list/css/hfpl_ini.css');
+	wp_enqueue_style('hfpl_ini',WP_PLUGIN_URL.'/hungred-feature-post-list/css/hfpl_ini.css');
 }
 /*
 Name: hfpl_loadjs
@@ -103,14 +103,16 @@ Description: uses wp_enqueue_script for safe printing of JavaScript
 function hfpl_loadjs()
 {
 	wp_enqueue_script('jquery');
-	wp_enqueue_script('hfpl_ini', get_settings('siteurl').'/wp-content/plugins/hungred-feature-post-list/js/hfpl_ini.js');
+	wp_enqueue_script('hfpl_ini', WP_PLUGIN_URL.'/hungred-feature-post-list/js/hfpl_ini.js');
 }
 add_action('admin_print_scripts', 'hfpl_loadjs');
 add_action('admin_print_styles', 'hfpl_loadcss');
 add_action('admin_menu', 'hfpl_post_option');
 function hfpl_id()
 {
-	echo "<!-- This site is power up by Hungred Feature Post List -->";
+	echo "
+	<!-- This site is power up by Hungred Feature Post List -->
+	";
 }
 add_action('wp_head', 'hfpl_id');
 /*

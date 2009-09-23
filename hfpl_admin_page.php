@@ -95,7 +95,7 @@ foreach ($row as $post) {
 	
 		<?php if($error != ""){?>
 		<hr />
-		<?php    echo "<h4>" . __( 'Hungred Thumbnail Error Section' ) . "</h4>"; ?>
+		<?php    echo "<h4>" . __( 'Feature Error Section' ) . "</h4>"; ?>
 		<p><div class='label'>
 		<h2><?php _e("Error Message: " ); ?></h2>
 		</div>
@@ -112,7 +112,7 @@ foreach ($row as $post) {
 		<hr />
 		<h2><?php _e("Support" ); ?></h2>
 		<p>
-		Please visit <a href="http://hungred.com/2009/07/14/useful-information/wordpress-plugin-hungred-post-thumbnail/">hungred.com</a> for any support enquiry or email <a href='clay@hungred.com'>clay@hungred.com</a>. You can also show your appreciation by saying 'Thanks' on the <a href='http://hungred.com/2009/07/14/useful-information/wordpress-plugin-hungred-post-thumbnail/'>plugin page</a> or visits our sponsors on <a href="http://hungred.com/2009/07/14/useful-information/wordpress-plugin-hungred-post-thumbnail/">hungred.com</a> to help us keep up with the maintanance. If you like this plugin, you can buy me a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">coffee</a>! You can also support this development with the donation button. Thanks!
+		Please visit <a href="http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/">hungred.com</a> for any support enquiry or email <a href='clay@hungred.com'>clay@hungred.com</a>. You can also show your appreciation by saying 'Thanks' on the <a href='http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/'>plugin page</a> or visits our sponsors on <a href="http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/">hungred.com</a> to help us keep up with the maintanance. If you like this plugin, you can buy me a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">coffee</a>! You can also support this development with the donation button. Thanks!
 		<p>
 <a href='http://www.pledgie.com/campaigns/5793'><img alt='Click here to lend your support to: Support Hungred Feature Post List and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/5793.png?skin_name=chrome' border='0' /></a>
 <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="ppbutton" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Support%20Hungred%20Feature%20Post%20List%20Development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest');return false;">
@@ -121,7 +121,6 @@ foreach ($row as $post) {
 		</p>
 	</form>
 </div>
-<link type="text/css" rel="stylesheet" href="<?php echo get_bloginfo('url')?>/wp-content/plugins/hungred-post-thumbnail/css/hfpl_ini.css"></link>
 <script type="text/javascript">
 /*
 Name: validate
