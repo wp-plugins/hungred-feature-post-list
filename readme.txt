@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_
 Tags: post, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
 Requires at least: 2.7
 Tested up to: 2.8.4
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 
 This thumbnail is created by Clay Lua. Please visit the plugin page for more information.
 
@@ -69,6 +69,11 @@ Please visit the plugin page for screen shots
 * Fixed feature table doesn't delete problem upon deletion
 = 1.0.5 =
 * Fixed Links
+= 1.0.6 =
+* Removed Header class option on admin
+* Added the ability to use before_widget,before_title,after_title,after_widget option declare on the theme function.php file
+* Changed the donation button to global donation button
+
 == Arbitrary section ==
 
 

@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 1.0.5
+Version: 1.0.6
 Author URI: http://hungred.com
 */
 
@@ -190,7 +190,7 @@ function hfpl_control()
 	echo "Just add this into the widget siderbar and the plugin will be automatically activated!";
 }
 
-function hfpl_widget()
+function hfpl_widget($args)
 {
 	global $wpdb;
 	$table = $wpdb->prefix."hfpl_options";
@@ -219,9 +219,13 @@ function hfpl_widget()
 				break;
 		endforeach;
 	}
-	echo '<li class="widget '.$options['hfpl_widget_class'].'">';
-	echo '<h2 class="'.$options['hfpl_header_class'].'">'.$options['hfpl_header'].'</h2>';
-	echo '<ul>';
+	
+
+	extract($args); 
+
+	echo '<li class="widget '.$options['hfpl_widget_class'].' ">';
+	echo $before_title.$options.['hfpl_header'].$after_title;
+	echo $$before_widget.'<ul>';
 	$i = 0;
 	foreach($feature_post as $postid)
 	{
@@ -233,7 +237,7 @@ function hfpl_widget()
 		else
 			break;
 	}
-	echo '</ul>';
+	echo '</ul>'. $after_widget;
 
 }
 
