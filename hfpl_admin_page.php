@@ -40,7 +40,6 @@ $row = $wpdb->get_row($query,ARRAY_A);
 	<form name="hfpl_form" id="hfpl_form" class="hfpl_admin" onsubmit="return validate()" enctype="multipart/form-data" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 		<?php    echo "<h4>" . __( 'Feature Settings' ) . "</h4>"; ?>
 		<p><div class='label'><?php _e("Feature Header" ); ?></div><input type="text" id="hfpl_header" name="hfpl_header" value="<?php echo $row['hfpl_header']; ?>" size="20"></p>
-		<p><div class='label'><?php _e("Feature WClass" ); ?></div><input type="text" id="hfpl_widget_class" name="hfpl_widget_class" value="<?php echo $row['hfpl_widget_class']; ?>" size="20"></p>
 		<p><div class='label'><?php _e("Feature Number" ); ?></div><input type="text" id="hfpl_no_post" name="hfpl_no_post" value="<?php echo $row['hfpl_no_post']; ?>" size="20"></p>
 		<p><div class='label'><?php _e("Feature Type: " ); ?>
 		</div><SELECT name="hfpl_type">
