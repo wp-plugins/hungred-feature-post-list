@@ -224,8 +224,8 @@ function hfpl_widget($args)
 	extract($args); 
 
 	echo '<li class="widget '.$options['hfpl_widget_class'].' ">';
-	echo $before_title.$options.['hfpl_header'].$after_title;
-	echo $$before_widget.'<ul>';
+	echo $before_title.$options['hfpl_header'].$after_title;
+	echo $before_widget.'<ul>';
 	$i = 0;
 	foreach($feature_post as $postid)
 	{
