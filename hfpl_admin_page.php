@@ -35,88 +35,90 @@ $row = $wpdb->get_row($query,ARRAY_A);
 
 ?>
 <div class="hfpl_wrap">
-	<?php    echo "<h2>" . __( 'Hungred Feature Post List' ) . "</h2>"; ?>
-	
+	<div class="wrap">
+	<?php    echo "<h2>" . __( 'Hungred Feature Post List Configuration' ) . "</h2>"; ?>
+	</div>
 	<form name="hfpl_form" id="hfpl_form" class="hfpl_admin" onsubmit="return validate()" enctype="multipart/form-data" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-		<?php    echo "<h4>" . __( 'Feature Settings' ) . "</h4>"; ?>
-		<p><div class='label'><?php _e("Feature Header" ); ?></div><input type="text" id="hfpl_header" name="hfpl_header" value="<?php echo $row['hfpl_header']; ?>" size="20"></p>
-		<p><div class='label'><?php _e("Feature Number" ); ?></div><input type="text" id="hfpl_no_post" name="hfpl_no_post" value="<?php echo $row['hfpl_no_post']; ?>" size="20"></p>
-		<p><div class='label'><?php _e("Feature Type: " ); ?>
-		</div><SELECT name="hfpl_type">
-		<?php 
-		if($row['hfpl_type'] == "S"){ ?>
-		<option selected value="S">Selected Only</option>
-		<option value="R">Random Only</option>
-		<option value="B">Both</option>
-		<?php }else if($row['hfpl_type'] == "R"){?>
-		<option value="S">Selected Only</option>
-		<option selected value="R">Random Only</option>
-		<option value="B">Both</option>
-		<?php }else if($row['hfpl_type'] == "B"){?>
-		<option value="S">Selected Only</option>
-		<option value="R">Random Only</option>
-		<option selected value="B">Both</option>
-		<?php }?>
-		</SELECT>
-		</p>		
-		
-<?php    echo "<h4>" . __( 'Selected Feature Post' ) . "</h4>"; ?>
-<table class="widefat post fixed" cellspacing="0">
-	<thead>
-	<tr>
-<?php print_column_headers('edit'); ?>
-	</tr>
-	</thead>
+	<div class="postbox-container" id="hfpl_admin">
+		<div class="metabox-holder">		
+			<div class="meta-box-sortables ui-sortable" >
+				<div class='postbox'>		
+					<?php    echo "<h3  class='hndle'>" . __( 'Feature Settings' ) . "</h3>"; ?>
+					<div class='inside size'>
+					<p><div class='label'><?php _e("Feature Header" ); ?></div><input type="text" id="hfpl_header" name="hfpl_header" value="<?php echo $row['hfpl_header']; ?>" size="20"></p>
+					<p><div class='label'><?php _e("Feature Number" ); ?></div><input type="text" id="hfpl_no_post" name="hfpl_no_post" value="<?php echo $row['hfpl_no_post']; ?>" size="20"></p>
+					<p><div class='label'><?php _e("Feature Type: " ); ?>
+					</div><SELECT name="hfpl_type">
+					<?php 
+					if($row['hfpl_type'] == "S"){ ?>
+					<option selected value="S">Selected Only</option>
+					<option value="R">Random Only</option>
+					<option value="B">Both</option>
+					<?php }else if($row['hfpl_type'] == "R"){?>
+					<option value="S">Selected Only</option>
+					<option selected value="R">Random Only</option>
+					<option value="B">Both</option>
+					<?php }else if($row['hfpl_type'] == "B"){?>
+					<option value="S">Selected Only</option>
+					<option value="R">Random Only</option>
+					<option selected value="B">Both</option>
+					<?php }?>
+					</SELECT>
+					</p>
+					<p class="submit">
+						<input type="submit" id="submit" value="<?php _e('Update Options' ) ?>" />
+					</p>
+					</div>
+				</div>
+				<div class='postbox'>		
+					<?php    echo "<h3  class='hndle'>" . __( 'Selected Feature Post' ) . "</h3>"; ?>
+					<table class="widefat post fixed" cellspacing="0">
+						<thead>
+						<tr>
+					<?php print_column_headers('edit'); ?>
+						</tr>
+						</thead>
 
-	<tfoot>
-	<tr>
-<?php print_column_headers('edit', false); ?>
-	</tr>
-	</tfoot>
+						<tfoot>
+						<tr>
+					<?php print_column_headers('edit', false); ?>
+						</tr>
+						</tfoot>
 
-	<tbody>
-<?php 
-$table = $wpdb->prefix."hfpl_records";
-$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't'";
-$row = $wpdb->get_results($query);
-foreach ($row as $post) {
-	$detail = get_post($post->hfpl_post_id, OBJECT);
-	_post_row($detail, $comment_pending_count[$post->hfpl_post_id], $mode);
-}
+						<tbody>
+					<?php 
+					$table = $wpdb->prefix."hfpl_records";
+					$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't'";
+					$row = $wpdb->get_results($query);
+					foreach ($row as $post) {
+						$detail = get_post($post->hfpl_post_id, OBJECT);
+						_post_row($detail, $comment_pending_count[$post->hfpl_post_id], $mode);
+					}
 
-?>
-	</tbody>
-</table>
+					?>
+						</tbody>
+					</table>
+				</div>
 
 
-
-	
-		<?php if($error != ""){?>
-		<hr />
-		<?php    echo "<h4>" . __( 'Feature Error Section' ) . "</h4>"; ?>
-		<p><div class='label'>
-		<h2><?php _e("Error Message: " ); ?></h2>
+				
+					<?php if($error != ""){?>
+					<div class='postbox'>	
+						<?php    echo "<h3  class='hndle'>" . __( 'Feature Error Section' ) . "</h3>"; ?>
+						<div class='inside size'>
+							<p><div class='label'>
+							<h2><?php _e("Error Message: " ); ?></h2>
+							</div>
+							<div class="hfpl_red">
+							<?php echo $error; ?>
+							</div>
+							</p>
+						</div>
+					</div>
+					<?php }?>
+			</div>
 		</div>
-		<div class="hfpl_red">
-		<?php echo $error; ?>
-		</div>
-		</p>
-		<?php }?>
-		
-		<p class="submit">
-		</div><input type="submit" id="submit" value="<?php _e('Update Options' ) ?>" />
-		</p>
-
-		<hr />
-		<h2><?php _e("Support" ); ?></h2>
-		<p>
-		Please visit <a href="http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/">hungred.com</a> for any support enquiry or email <a href='clay@hungred.com'>clay@hungred.com</a>. You can also show your appreciation by saying 'Thanks' on the <a href='http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/'>plugin page</a> or visits our sponsors on <a href="http://hungred.com/2009/08/15/useful-information/wordpress-plugin-hungred-feature-post-list/">hungred.com</a> to help us keep up with the maintanance. If you like this plugin, you can buy me a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">coffee</a>! You can also support this development with the donation button. Thanks!
-		<p>
-<a href='http://www.pledgie.com/campaigns/6187'><img alt='Click here to lend your support to: Hungred Wordpress Development and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/6187.png?skin_name=chrome' border='0' /></a>
-<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="ppbutton" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Support%20Hungred%20Feature%20Post%20List%20Development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest');return false;">
-<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</p>
-		</p>
+	</div>
 	</form>
 </div>
 <script type="text/javascript">
