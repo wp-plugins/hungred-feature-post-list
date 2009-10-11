@@ -76,7 +76,6 @@ Please visit the plugin page for screen shots
 = 1.0.7 =
 * Improve Interface
 * Added News
-== Arbitrary section ==
+= 1.0.8 =
+* Fixed plugin style that affect other style
 
-
-== A brief Markdown Example ==
