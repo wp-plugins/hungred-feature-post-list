@@ -73,7 +73,7 @@ function hfpl_admin(){
 	$support_links = "http://wordpress.org/tags/hungred-hungred-feature-post-list";
 	require_once('hfpl_admin_page.php'); 
 	?>
-	<div class="postbox-container" id="hpt_sidebar" style="width:20%;">
+	<div class="postbox-container" id="hungred_sidebar" style="width:20%;">
 		<div class="metabox-holder">	
 			<div class="meta-box-sortables">
 				<?php
