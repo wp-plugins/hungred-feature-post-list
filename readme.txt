@@ -3,8 +3,8 @@ Contributors: Clay Lua
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: post, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
 Requires at least: 2.7
-Tested up to: 2.8.4
-Stable tag: 1.0.8
+Tested up to: 2.8.6
+Stable tag: 1.0.9
 
 This thumbnail is created by Clay Lua. Please visit the plugin page for more information.
 
@@ -79,4 +79,5 @@ Please visit the plugin page for screen shots
 = 1.0.8 =
 * Fixed plugin style that affect other style
 * Enhance look
-
+= 1.0.9 =
+* Change font type to prevent mac user who use firefox or chrome browser having problem viewing the page
