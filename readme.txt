@@ -3,8 +3,8 @@ Contributors: Clay Lua
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: post, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
 Requires at least: 2.7
-Tested up to: 2.8.6
-Stable tag: 1.0.9
+Tested up to: 2.9.1
+Stable tag: 1.1.0
 
 This thumbnail is created by Clay Lua. Please visit the plugin page for more information.
 
@@ -81,3 +81,6 @@ Please visit the plugin page for screen shots
 * Enhance look
 = 1.0.9 =
 * Change font type to prevent mac user who use firefox or chrome browser having problem viewing the page
+= 1.1.0 =
+* Correct the plugin header arrangement on the widget
+* Fixes the problem of feature amount get overlapped.

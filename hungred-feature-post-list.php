@@ -232,11 +232,13 @@ function hfpl_widget($args)
 		foreach ($row as $post) {
 			
 			$feature_post[] = $post->hfpl_post_id;
+			if(count($feature_post) >= $options['hfpl_no_post'])
+				break;
 		}
 	if($options['hfpl_type'] == 'B' || $options['hfpl_type'] == 'R')
 	if(count($feature_post) < $options['hfpl_no_post'])
 	{
-		$shortage = $options['hfpl_no_post']-count($feature_post);
+		$shortage = $options['hfpl_no_post']- count($feature_post);
 		$rand_posts = get_posts('orderby=rand');
 		foreach( $rand_posts as $post ) :
 			if(!in_array($post->ID, $feature_post))
@@ -249,9 +251,8 @@ function hfpl_widget($args)
 
 	extract($args); 
 
-	
-	echo $before_widget.'<ul>';
 	echo $before_title.$options['hfpl_header'].$after_title;
+	echo $before_widget.'<ul>';
 	$i = 0;
 	foreach($feature_post as $postid)
 	{
