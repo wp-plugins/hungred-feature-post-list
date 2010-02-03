@@ -250,9 +250,9 @@ function hfpl_widget($args)
 	
 
 	extract($args); 
-
+	echo $before_widget;
 	echo $before_title.$options['hfpl_header'].$after_title;
-	echo $before_widget.'<ul>';
+	echo '<ul>';
 	$i = 0;
 	foreach($feature_post as $postid)
 	{
