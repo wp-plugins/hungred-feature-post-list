@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 2.0.1
+Version: 2.0.2
 Author URI: http://hungred.com
 */
 
@@ -230,7 +230,7 @@ if (!class_exists("HFPL_WIDGET")) {
 	$table = $wpdb->prefix."hfpl_record";
 	$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't' AND hfpl_idx = '".$feature_idx."'";
 	$row = $wpdb->get_results($query);
-
+	
 	$feature_post = Array();
 	if($feature_type == 'B' || $feature_type == 'S')
 		foreach ($row as $post) {
@@ -239,15 +239,17 @@ if (!class_exists("HFPL_WIDGET")) {
 			if(count($feature_post) >= $feature_number)
 				break;
 		}
+		
 	if($feature_type == 'B' || $feature_type == 'R')
 	if(count($feature_post) < $feature_number)
 	{
 		$shortage = $feature_number- count($feature_post);
-		$rand_posts = get_posts('orderby=rand');
+		$rand_posts = get_posts('numberposts='.$feature_number.'&orderby=rand');
+		$i = 0;
 		foreach( $rand_posts as $post ) :
 			if(!in_array($post->ID, $feature_post))
 				$feature_post[] = $post->ID;
-			if(count($feature_post) >= $feature_number)
+			if($i > $shortage)
 				break;
 		endforeach;
 	}
@@ -257,16 +259,10 @@ if (!class_exists("HFPL_WIDGET")) {
 	echo $before_widget;
 	echo $before_title.$title.$after_title;
 	echo '<ul>';
-	$i = 0;
 	foreach($feature_post as $postid)
 	{
-		if($i< $feature_number)
-		{
-			$post = get_post($postid, OBJECT);
-			echo '<li><a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a></li>';
-		}
-		else
-			break;
+		$post = get_post($postid, OBJECT);
+		echo '<li><a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a></li>';
 	}
 	echo '</ul>'. $after_widget;
 

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_
 Tags: post,multiple, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
 Requires at least: 2.7
 Tested up to: 2.9.2
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 
 This thumbnail is created by Clay Lua. Please visit the plugin page for more information. Please take note that v2 onwards this plugin will required a reinstallation.
 
@@ -88,4 +88,6 @@ Please visit the plugin page for screen shots
 * Now Feature Post can have more than 1 feature widget. (multiple feature) Credit goes to Michael from http://massage.dk for sharing this custom program made request to be redistribute to others.
 * Improve a lot of things.
 = 2.0.1 =
-*Fixed incompatibility with older version problem.
+* Fixed incompatibility with older version problem.
+= 2.0.2 =
+* Fixed number of post being feature problem
