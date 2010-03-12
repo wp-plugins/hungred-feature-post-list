@@ -20,7 +20,7 @@ global $wpdb;
 $hfpl_post = $post->ID;
 
 $hfpl_status = $post->post_status;
-$hfpl_table = $wpdb->prefix."hfpl_records";
+$hfpl_table = $wpdb->prefix."hfpl_record";
 $hfpl_query = "SELECT `hfpl_post_id` FROM `".$hfpl_table."` WHERE `hfpl_post_id` = '".$hfpl_post."' AND `hfpl_status` = 't' limit 1";
 $hfpl_row = $wpdb->get_row($hfpl_query,ARRAY_A);
 $hfpl_hasID = $hfpl_row['hfpl_post_id'];

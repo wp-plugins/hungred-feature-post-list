@@ -49,7 +49,7 @@
 						<tbody>
 					<?php 
 					global $wpdb;
-					$table = $wpdb->prefix."hfpl_records";
+					$table = $wpdb->prefix."hfpl_record";
 					$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't' AND `hfpl_idx` = '".$key['HFPL_IDX']."'";
 					$row = $wpdb->get_results($query);
 					foreach ($row as $post) {

@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 2.0.0
+Version: 2.0.1
 Author URI: http://hungred.com
 */
 
@@ -150,12 +150,16 @@ Description: the structure of our Wordpress plugin
 function hfpl_install()
 {
 	global $wpdb;
+	$table = $wpdb->prefix."hfpl_records";
+	$structure = "DROP TABLE `".$table."`";
+	$wpdb->query($structure);
+	
 	$table = $wpdb->prefix."hfpl_options";
 	$structure = "DROP TABLE `".$table."`";
 	$wpdb->query($structure);
 	
     
-	$table = $wpdb->prefix."hfpl_records";
+	$table = $wpdb->prefix."hfpl_record";
 	$structure = "CREATE TABLE `".$table."` (
 		hfpl_post_id bigint(20) NOT NULL DEFAULT 0,
 		hfpl_status VARCHAR(1) NOT NULL DEFAULT '0',
@@ -183,7 +187,9 @@ function hfpl_uninstall()
 	$table = $wpdb->prefix."hfpl_records";
 	$structure = "DROP TABLE `".$table."`";
 	$wpdb->query($structure);
-	
+	$table = $wpdb->prefix."hfpl_record";
+	$structure = "DROP TABLE `".$table."`";
+	$wpdb->query($structure);
 	$table = $wpdb->prefix."hfpl_options";
 	$structure = "DROP TABLE `".$table."`";
 	$wpdb->query($structure);
@@ -221,7 +227,7 @@ if (!class_exists("HFPL_WIDGET")) {
 			$feature_number =  $instance['HFPL_NO'];
 			$feature_type =  $instance['HFPL_TYPE'];
 			$feature_idx =  $instance['HFPL_IDX'];
-	$table = $wpdb->prefix."hfpl_records";
+	$table = $wpdb->prefix."hfpl_record";
 	$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't' AND hfpl_idx = '".$feature_idx."'";
 	$row = $wpdb->get_results($query);
 

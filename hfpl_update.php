@@ -21,7 +21,7 @@ $status = $_POST['current'];
 $post = $_POST['post'];
 $post = $_POST['post'];
 $val = $_POST['selected'];
-$table = $wpdb->prefix."hfpl_records";
+$table = $wpdb->prefix."hfpl_record";
 $query = "REPLACE INTO $table(hfpl_post_id, hfpl_status, hfpl_idx) VALUES('".$post."', '".$status."', '".$val."')";
 $wpdb->query($query);
 
