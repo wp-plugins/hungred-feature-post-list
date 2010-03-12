@@ -15,24 +15,6 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-global $wpdb, $mode;
-$error = "";
-$table = $wpdb->prefix."hfpl_options";
-
-if($_POST['hfpl_no_post'] != "")
-{
-//update the database with Replace instead of insert to avoid duplication data in the table
-	$query = "REPLACE INTO $table(hfpl_option_id, hfpl_type, hfpl_no_post,hfpl_header,hfpl_header_class,hfpl_widget_class) 
-	VALUES('1', '".$_POST['hfpl_type']."', '".$_POST['hfpl_no_post']."', '".$_POST['hfpl_header']."', '".$_POST['hfpl_header_class']."', '".$_POST['hfpl_widget_class']."')";
-	$wpdb->query($query);
-
-}
-
-//retrieve new data
-$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_option_id` = '1' limit 1";
-$row = $wpdb->get_row($query,ARRAY_A);
-
-
 ?>
 <div class="hfpl_wrap">
 	<div class="wrap">
@@ -42,36 +24,15 @@ $row = $wpdb->get_row($query,ARRAY_A);
 	<div class="postbox-container" id="hfpl_admin">
 		<div class="metabox-holder">		
 			<div class="meta-box-sortables ui-sortable" >
-				<div class='postbox'>		
-					<?php    echo "<h3  class='hndle'>" . __( 'Feature Settings' ) . "</h3>"; ?>
-					<div class='inside size'>
-					<p><div class='label'><?php _e("Feature Header" ); ?></div><input type="text" id="hfpl_header" name="hfpl_header" value="<?php echo $row['hfpl_header']; ?>" size="20"></p>
-					<p><div class='label'><?php _e("Feature Number" ); ?></div><input type="text" id="hfpl_no_post" name="hfpl_no_post" value="<?php echo $row['hfpl_no_post']; ?>" size="20"></p>
-					<p><div class='label'><?php _e("Feature Type: " ); ?>
-					</div><SELECT name="hfpl_type">
-					<?php 
-					if($row['hfpl_type'] == "S"){ ?>
-					<option selected value="S">Selected Only</option>
-					<option value="R">Random Only</option>
-					<option value="B">Both</option>
-					<?php }else if($row['hfpl_type'] == "R"){?>
-					<option value="S">Selected Only</option>
-					<option selected value="R">Random Only</option>
-					<option value="B">Both</option>
-					<?php }else if($row['hfpl_type'] == "B"){?>
-					<option value="S">Selected Only</option>
-					<option value="R">Random Only</option>
-					<option selected value="B">Both</option>
-					<?php }?>
-					</SELECT>
-					</p>
-					<p class="submit">
-						<input type="submit" id="submit" value="<?php _e('Update Options' ) ?>" />
-					</p>
-					</div>
-				</div>
-				<div class='postbox'>		
-					<?php    echo "<h3  class='hndle'>" . __( 'Selected Feature Post' ) . "</h3>"; ?>
+				<?php
+					$option = (get_option('widget_hfpl_widget'));
+					foreach($option as $key){
+						if($key['HFPL_IDX'] == "")
+							continue;
+					
+				?>
+				<div class=''>		
+					<?php    echo "<h3  class='hndle'>" . __( 'Selected Feature Post' ) . " - ".$key['title'] . "</h3>"; ?>
 					<table class="widefat post fixed" cellspacing="0">
 						<thead>
 						<tr>
@@ -87,8 +48,9 @@ $row = $wpdb->get_row($query,ARRAY_A);
 
 						<tbody>
 					<?php 
+					global $wpdb;
 					$table = $wpdb->prefix."hfpl_records";
-					$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't'";
+					$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't' AND `hfpl_idx` = '".$key['HFPL_IDX']."'";
 					$row = $wpdb->get_results($query);
 					foreach ($row as $post) {
 						$detail = get_post($post->hfpl_post_id, OBJECT);
@@ -99,7 +61,9 @@ $row = $wpdb->get_row($query,ARRAY_A);
 						</tbody>
 					</table>
 				</div>
-
+				<?php
+					}
+				?>
 
 				
 					<?php if($error != ""){?>

@@ -22,14 +22,19 @@ Parameter: 	calller: determine who are the caller
 
 Description: use to update the status of the record
 */
-function ajaxCall(status, id)
+function ajaxCall(status, id, val)
 {
-	jQuery.post("../wp-content/plugins/hungred-feature-post-list/hfpl_update.php", { current: status, post: id}, function(data){
+	jQuery.post("../wp-content/plugins/hungred-feature-post-list/hfpl_update.php", { current: status, post: id, selected: val}, function(data){
   });
 }
 	jQuery("#hfpl_checkbox").click(function(){
+		if(jQuery('#hfpl_idx option:selected').val() == "")
+		{
+			alert('Place select a location to feature your post');
+			return false;
+		}
 		if(jQuery("#hfpl_status").attr('value') == 'publish' && jQuery("#hfpl_id").attr('value') != "")
-		ajaxCall(jQuery(this).attr('checked'), jQuery("#hfpl_id").attr('value'));
+		ajaxCall(jQuery(this).attr('checked'), jQuery("#hfpl_id").attr('value'), jQuery('#hfpl_idx option:selected').val());
 		else
 		{
 			jQuery(this).attr('checked', false);

@@ -1,23 +1,23 @@
 === Plugin Name ===
 Contributors: Clay Lua
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
-Tags: post, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
+Tags: post,multiple, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
 Requires at least: 2.7
-Tested up to: 2.9.1
-Stable tag: 1.1.0
+Tested up to: 2.9.2
+Stable tag: 2.0.0
 
-This thumbnail is created by Clay Lua. Please visit the plugin page for more information.
+This thumbnail is created by Clay Lua. Please visit the plugin page for more information. Please take note that v2 onwards this plugin will required a reinstallation.
 
 == Description ==
-This is similar to recent post embedded in Wordpress. The only differences is that this come with a control panel where you can control the following stuff
+*Please take note that v2 onwards this plugin will required a reinstallation if you are using previous version.*
+This is similar to recent post embedded in Wordpress. The only differences is that this come with a different widget where you can control the following stuff
 
 	1. number of feature
-	2. CSS class on the feature container
-	3. CSS class on the feature widget
-	4. Feature type available, 'selected only', 'random only' and 'both
-	5. Table that shows all the selected feature post
+	2. CSS class on the feature widget
+	3. Feature type available, 'selected only', 'random only' and 'both
+	4. Table that shows all the selected feature post
+	5. Multiple widget for different feature
 
-It also come with a widget that allow you to customize the placement of the feature post
 
 This plugin has been tested with the following browsers:
 
@@ -47,7 +47,7 @@ Question: What language does this support currently?
 Answer: Unfortunately it only support English but if anyone would like to translate this, please send me a email at clay@hungred.com
 
 Question: Is it reliable?
-Answer: Look at Hungred.com , i am guinea pigs
+Answer: Look at Hungred.com , i am the guinea pig
 
 
 == Screenshots ==
@@ -84,3 +84,6 @@ Please visit the plugin page for screen shots
 = 1.1.0 =
 * Correct the plugin header arrangement on the widget
 * Fixes the problem of feature amount get overlapped.
+= 2.0.0 =
+* Now Feature Post can have more than 1 feature widget. (multiple feature) Credit goes to Michael from http://massage.dk for sharing this custom program made request to be redistribute to others.
+* Improve a lot of things.

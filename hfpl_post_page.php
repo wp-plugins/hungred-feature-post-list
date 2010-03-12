@@ -27,6 +27,14 @@ $hfpl_hasID = $hfpl_row['hfpl_post_id'];
 ?>
 <div id="hfpl_main">
 		<?php 
+		$option = (get_option('widget_hfpl_widget'));
+		echo '<select name="hfpl_idx" id="hfpl_idx" style="width:40%">';
+		foreach($option as $key){
+			if($key['HFPL_IDX'] == "")
+				continue;
+			echo '<option value="'.$key['HFPL_IDX'].'">'.$key['title'].'</option>';
+		}
+		echo '</select>';		
 		if($hfpl_hasID != ""){
 			echo "<input type='checkbox' name='hfpl_checkbox' id='hfpl_checkbox' checked />";
 		}else{

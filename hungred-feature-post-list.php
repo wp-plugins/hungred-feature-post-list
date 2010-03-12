@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 1.1.0
+Version: 2.0.0
 Author URI: http://hungred.com
 */
 
@@ -149,30 +149,23 @@ Description: the structure of our Wordpress plugin
 */
 function hfpl_install()
 {
-
-    global $wpdb;
+	global $wpdb;
+	$table = $wpdb->prefix."hfpl_options";
+	$structure = "DROP TABLE `".$table."`";
+	$wpdb->query($structure);
+	
+    
 	$table = $wpdb->prefix."hfpl_records";
-    $structure = "CREATE TABLE IF NOT EXISTS `".$table."` (
-        hfpl_post_id Double NOT NULL DEFAULT 0,
-		hfpl_status varchar(1) NOT NULL DEFAULT '0',
-		UNIQUE KEY id (hfpl_post_id)
-    );";
-    $wpdb->query($structure);
-
-
-    $table = $wpdb->prefix."hfpl_options";
-    $structure = "CREATE TABLE IF NOT EXISTS `".$table."` (
-		hfpl_option_id DOUBLE NOT NULL AUTO_INCREMENT ,
-        hfpl_no_post Double NOT NULL DEFAULT 5,
-		hfpl_type varchar(1) NOT NULL DEFAULT 'B',
-		hfpl_header varchar(255) NOT NULL DEFAULT 'Feature Posts',
-		hfpl_header_class varchar(255) NOT NULL DEFAULT 'widgettitle',
-		hfpl_widget_class varchar(255) NOT NULL,
-		UNIQUE KEY id (hfpl_option_id)
-    );";
-    $wpdb->query($structure);
-	$wpdb->query("INSERT INTO $table(hfpl_option_id)
-	VALUES('1')");
+	$structure = "CREATE TABLE `".$table."` (
+		hfpl_post_id bigint(20) NOT NULL DEFAULT 0,
+		hfpl_status VARCHAR(1) NOT NULL DEFAULT '0',
+		hfpl_idx VARCHAR(254) NOT NULL,
+		time TIMESTAMP NOT NULL,
+		PRIMARY KEY (hfpl_post_id),
+		INDEX(hfpl_idx)
+	);";
+    require_once ABSPATH . "wp-admin/includes/upgrade.php";
+	$return = dbDelta($structure);
 }
 if ( function_exists('register_activation_hook') )
 	register_activation_hook('hungred-feature-post-list/hungred-feature-post-list.php', 'hfpl_install');
@@ -211,39 +204,44 @@ function hfpl_post_delete()
 	$wpdb->query($sqlquery);	
 }	
 add_action('delete_post', 'hfpl_post_delete');
-function hfpl_control()
-{
-	echo "Just add this into the widget siderbar and the plugin will be automatically activated!";
-}
 
-function hfpl_widget($args)
-{
-	global $wpdb;
-	$table = $wpdb->prefix."hfpl_options";
-	$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_option_id` = '1' limit 1";
-	$options = $wpdb->get_row($query,ARRAY_A);
-	
+
+if (!class_exists("HFPL_WIDGET")) {
+	class HFPL_WIDGET extends WP_Widget{
+		function HFPL_WIDGET() {
+			 parent::WP_Widget(false, $name = 'Hungred Feature Post List');
+		}
+		
+		/** @see WP_Widget::widget */
+		function widget($args, $instance) {	
+			global $wpdb, $current_user;
+			extract( $args );
+			$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( '' ) : $instance['title']);
+	        //$HFPL_type = empty( $instance['HFPL_NO'] ) ? '' : $instance['HFPL_NO'];
+			$feature_number =  $instance['HFPL_NO'];
+			$feature_type =  $instance['HFPL_TYPE'];
+			$feature_idx =  $instance['HFPL_IDX'];
 	$table = $wpdb->prefix."hfpl_records";
-	$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't'";
+	$query = "SELECT * FROM `".$table."` WHERE 1 AND `hfpl_status` = 't' AND hfpl_idx = '".$feature_idx."'";
 	$row = $wpdb->get_results($query);
-	
+
 	$feature_post = Array();
-	if($options['hfpl_type'] == 'B' || $options['hfpl_type'] == 'S')
+	if($feature_type == 'B' || $feature_type == 'S')
 		foreach ($row as $post) {
 			
 			$feature_post[] = $post->hfpl_post_id;
-			if(count($feature_post) >= $options['hfpl_no_post'])
+			if(count($feature_post) >= $feature_number)
 				break;
 		}
-	if($options['hfpl_type'] == 'B' || $options['hfpl_type'] == 'R')
-	if(count($feature_post) < $options['hfpl_no_post'])
+	if($feature_type == 'B' || $feature_type == 'R')
+	if(count($feature_post) < $feature_number)
 	{
-		$shortage = $options['hfpl_no_post']- count($feature_post);
+		$shortage = $feature_number- count($feature_post);
 		$rand_posts = get_posts('orderby=rand');
 		foreach( $rand_posts as $post ) :
 			if(!in_array($post->ID, $feature_post))
 				$feature_post[] = $post->ID;
-			if(count($feature_post) >= $options['hfpl_no_post'])
+			if(count($feature_post) >= $feature_number)
 				break;
 		endforeach;
 	}
@@ -251,12 +249,12 @@ function hfpl_widget($args)
 
 	extract($args); 
 	echo $before_widget;
-	echo $before_title.$options['hfpl_header'].$after_title;
+	echo $before_title.$title.$after_title;
 	echo '<ul>';
 	$i = 0;
 	foreach($feature_post as $postid)
 	{
-		if($i< $options['hfpl_no_post'])
+		if($i< $feature_number)
 		{
 			$post = get_post($postid, OBJECT);
 			echo '<li><a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a></li>';
@@ -266,14 +264,55 @@ function hfpl_widget($args)
 	}
 	echo '</ul>'. $after_widget;
 
+
+		}
+
+		/** @see WP_Widget::update */
+		function update($new_instance, $old_instance) {				
+			$instance = $old_instance;
+	                $instance['title'] = strip_tags($new_instance['title']);
+	                $instance['HFPL_NO'] = $new_instance['HFPL_NO'];
+					$instance['HFPL_TYPE'] = $new_instance['HFPL_TYPE'];
+					$instance['HFPL_IDX'] = $new_instance['HFPL_IDX'];
+	                return $instance;
+		}
+
+		/** @see WP_Widget::form */
+		function form($instance) {		
+			$instance = wp_parse_args( (array) $instance, array( 'HFPL_NO' => '5','HFPL_NO' => 'B', 'title' => '', 'HFPL_CLASS', 'widget') );
+			$title = esc_attr($instance['title']);
+			?>
+	                <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
+					<p>
+						<label for="<?php echo $this->get_field_id('HFPL_NO'); ?>"><?php _e( 'Post Numbers:' ); ?></label>
+						<select name="<?php echo $this->get_field_name('HFPL_NO'); ?>" id="<?php echo $this->get_field_id('HFPL_NO'); ?>" class="widefat">
+							<option value=''></option>
+								<?php
+									$loop = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+									foreach($loop as $value){
+										echo '<option value="'.$value.'" '.selected( $instance['HFPL_NO'], $value ).'>'.$value.'</option>';
+									}
+								?>
+						</select>
+	                </p>
+					<p>
+						<label for="<?php echo $this->get_field_id('HFPL_TYPE'); ?>"><?php _e( 'Feature Type:' ); ?></label>
+						<select name="<?php echo $this->get_field_name('HFPL_TYPE'); ?>" id="<?php echo $this->get_field_id('HFPL_TYPE'); ?>" class="widefat">
+							<?php
+								$loop = array('S'=>'Selected Only','R'=>'Random','B'=>'Both');
+
+								while ($value = current($loop)) {
+
+									echo '<option value="'.key($loop).'" '.selected( $instance['HFPL_TYPE'], key($loop) ).'>'.$value.'</option>';
+									next($loop);
+								}
+							?>
+						</SELECT>
+					</p>
+					<input type="hidden" style="display:none" name="<?php echo $this->get_field_name('HFPL_IDX'); ?>" value="<?php echo $this->get_field_name('HFPL_IDX');  ?>" />
+	<?php
+		}
+	}
+	add_action('widgets_init', create_function('', 'return register_widget("HFPL_WIDGET");'));
 }
-
-
-function hfpl_register()
-{
-    register_sidebar_widget('Hungred Feature Post List', 'hfpl_widget');
-    register_widget_control('Hungred Feature Post List', 'hfpl_control');
-}
-add_action("widgets_init",'hfpl_register');
-
 ?>
