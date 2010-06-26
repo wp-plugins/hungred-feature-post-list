@@ -26,9 +26,13 @@
 			<div class="meta-box-sortables ui-sortable" >
 				<?php
 					$option = (get_option('widget_hfpl_widget'));
+					$nothing = true;
 					foreach($option as $key){
+						
 						if($key['HFPL_IDX'] == "")
 							continue;
+						else
+							$nothing = false;
 					
 				?>
 				<div class=''>		
@@ -63,6 +67,21 @@
 				</div>
 				<?php
 					}
+					if($nothing){
+				?>
+					<div class='postbox'>	
+						<?php    echo "<h3  class='hndle'>" . __( 'Feature Error Section' ) . "</h3>"; ?>
+						<div class='inside size'>
+							<p><div class='label'>
+							</div>
+							<div class="hfpl_red">
+							<?php echo __("No feature post widget is being used. Please use at least one widget before accessing this place."); ?>
+							</div>
+							</p>
+						</div>
+					</div>
+				<?php
+					}
 				?>
 
 				
@@ -71,10 +90,10 @@
 						<?php    echo "<h3  class='hndle'>" . __( 'Feature Error Section' ) . "</h3>"; ?>
 						<div class='inside size'>
 							<p><div class='label'>
-							<h2><?php _e("Error Message: " ); ?></h2>
+							<?php _e("Error Message: " ); ?>
 							</div>
 							<div class="hfpl_red">
-							<?php echo $error; ?>
+							<?php echo __($error); ?>
 							</div>
 							</p>
 						</div>

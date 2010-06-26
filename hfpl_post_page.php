@@ -40,7 +40,7 @@ $hfpl_hasID = $hfpl_row['hfpl_post_id'];
 		}else{
 			echo "<input type='checkbox' name='hfpl_checkbox' id='hfpl_checkbox' />";
 		} _e(" Feature This Post?");
-		echo "<p><a href='".get_settings('siteurl')."/wp-admin/options-general.php?page=Hungred Feature Post List'>Return to plugin admin page</a></p>";
+		echo "<p><a href='".get_settings('siteurl')."/wp-admin/options-general.php?page=Hungred-Feature-Post-List'>Return to plugin admin page</a></p>";
 		echo "<input type='hidden' name='hfpl_id' id='hfpl_id' value='".$hfpl_post."' />";
 		echo "<input type='hidden' name='hfpl_status' id='hfpl_status' value='".$hfpl_status."' />";
 		?>

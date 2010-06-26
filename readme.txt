@@ -3,8 +3,8 @@ Contributors: Clay Lua
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=i_ah_yong%40hotmail%2ecom&lc=MY&item_name=Coffee&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: post,multiple, feature, hungred, hungred feature post list, feature post, post feature, hfpl, hfpl_
 Requires at least: 2.7
-Tested up to: 2.9.2
-Stable tag: 2.0.2
+Tested up to: 3.0.0
+Stable tag: 2.0.3
 
 This thumbnail is created by Clay Lua. Please visit the plugin page for more information. Please take note that v2 onwards this plugin will required a reinstallation.
 
@@ -91,3 +91,6 @@ Please visit the plugin page for screen shots
 * Fixed incompatibility with older version problem.
 = 2.0.2 =
 * Fixed number of post being feature problem
+= 2.0.2 =
+* Fixed Access problem on admin page
+* Added useful message to admin page.

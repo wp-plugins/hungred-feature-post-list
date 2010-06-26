@@ -4,7 +4,7 @@ Plugin Name: Hungred Feature Post List
 Plugin URI: http://hungred.com/useful-information/wordpress-plugin-hungred-feature-post-list/
 Description: This plugin is design for hungred.com and people who face the same problem! Please visit the plugin page for more information.
 Author: Clay lua
-Version: 2.0.2
+Version: 2.0.3
 Author URI: http://hungred.com
 */
 
@@ -40,10 +40,11 @@ Description: this method depend on hfpl_admin for the interface to be produce wh
 */
 
 function add_hfpl_to_admin_panel_actions() {
-    $plugin_page = add_options_page("Hungred Feature Post List", "Hungred Feature Post List", 10, "Hungred Feature Post List", "hfpl_admin");  
+    $plugin_page = add_options_page("Hungred Feature Post List", "Hungred Feature Post List", 10, "Hungred-Feature-Post-List", "hfpl_admin");  
 	add_action( 'admin_head-'. $plugin_page, 'hfpl_admin_header' );
 
 }
+add_action('admin_menu', 'add_hfpl_to_admin_panel_actions');
 
 /*
 Name: hfpl_admin_header
@@ -62,6 +63,9 @@ Parameter: 	NONE
 Description: this method depend on hfpl_admin_page.php to display all the relevant information on our admin page
 */
 function hfpl_admin(){
+	if (!current_user_can('manage_options'))  {
+		wp_die( __('You do not have sufficient permissions to access this page.') );
+	 }
 	global $hungredObj;
 	$support_links = "";
 	$plugin_links = array();
@@ -88,7 +92,6 @@ function hfpl_admin(){
 	<?php
 	 
 }
-add_action('admin_menu', 'add_hfpl_to_admin_panel_actions');
 /*
 Name: hfpl_post_option
 Usage: add a container into Wordpress post section
